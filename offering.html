@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Offering</title>
+
+  <script src="utils.js"></script>
+  <script src="offering.js"></script>
+
+  <style>
+    button {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <template id="connectedPeerTemplate">
+    <input style="width: 40%" />
+    <input style="width: 40%" />
+    <button style="padding: 0 5.5px;" hidden>❌</button>
+  </template>
+
+  <h2 align="center">WebRTC Host</h2>
+
+  <div style="display: flex;">
+    <div style="width: 65%; padding: 10px">
+      <div id="chatHistory" style="height: 400px; overflow: auto; border: 1px solid;"></div>
+    </div>
+
+    <div style="width: 35%; padding: 10px">
+      <p align="center" style="margin-bottom: 5px;">Offer</p>
+      <input id="offerData" style="width: 82%" readonly />
+      <button onclick="copyInputText('offerData')">📋</button>
+
+      <p align="center" style="margin-bottom: 5px;">Peers</p>
+
+      <div id="existingPeers"></div>
+
+      <div id="addNewPeerInputs" style="margin-top: 15px;">
+        <input id="peerName" placeholder="Peer name" style="width: 40%" />
+        <input id="peerAnswer" placeholder="Peer answer" style="width: 40%" />
+        <button style="padding: 0 9px;" onclick="addPeer(document.getElementById('peerName').value)">✓</button>
+      </div>
+
+      <div id="addNewPeerButton" align="center" style="margin-top: 15px;">
+        <button onclick="addNewPeerButtonClick()">Add new peer</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  document.getElementById('addNewPeerInputs').hidden = true;
+
+  const addNewPeerButtonClick = () => {
+    document.getElementById('addNewPeerInputs').placeholder = "please wait for few seconds";
+    generateOffer();
+
+    document.getElementById('addNewPeerButton').hidden = true;
+    document.getElementById('addNewPeerInputs').hidden = false;
+  }
+</script>
+
+</html>
